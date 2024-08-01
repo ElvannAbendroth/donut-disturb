@@ -1,0 +1,35 @@
+---
+import Section from '../Section'
+import { Card, CardContent, CardFooter, CardHeader } from '../ui/card'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  testimonials: CollectionEntry<'testimonial'>[]
+}
+
+const { testimonials } = Astro.props
+---
+
+<Section.Root>
+  <Section.Content className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-layout">
+    {
+      testimonials.map(testimonial => {
+        const {
+          data: { message, author, image },
+        } = testimonial
+
+        return (
+          <Card className="text-center border-none shadow-none h-full ">
+            <CardHeader />
+            <CardContent className="max-w-optical flex flex-col gap-4 h-full align-middle items-center">
+              <img src={image.src.src} alt={image.alt} class="h-12 w-12 rounded-full bg-secondary bg-cover" />
+              <p>"{message}"</p>
+              <p class="font-semibold">- {author}</p>
+            </CardContent>
+            <CardFooter />
+          </Card>
+        )
+      })
+    }
+  </Section.Content>
+</Section.Root>

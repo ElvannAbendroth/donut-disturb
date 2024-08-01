@@ -1,0 +1,70 @@
+---
+import Prose from '@/components/Prose'
+import Section from '@/components/Section'
+import NewsletterForm from '@/components/NewsletterForm'
+import Layout from '@/layouts/Layout.astro'
+import { siteConfig } from '@/utils/config'
+import HeroSection from '@/components/sections/HeroSection.astro'
+import FeatureSection from '@/components/sections/FeatureSection.astro'
+import { getCollection, getEntry } from 'astro:content'
+import ImageAndText from '@/components/sections/ImageAndText'
+import TestimonialsSection from '@/components/sections/TestimonialsSection.astro'
+import ProjectsSection from '@/components/sections/ProjectsSection.astro'
+
+const aboutBlock = await getEntry('block', 'about')
+const features = await getCollection('feature')
+const testimonials = await getCollection('testimonial')
+const projects = await getCollection('project')
+
+const { Content } = await aboutBlock.render()
+
+export const prerender = true
+---
+
+<Layout title={siteConfig.name}>
+  <!-- Hero -->
+  <HeroSection
+    preTitle={"Let's"}
+    title={siteConfig.name}
+    subtitle={siteConfig.description}
+    cta={{ label: 'Call to Action', href: '/', icon: 'MousePointerClick' }}
+  />
+  <!-- Features -->
+  <FeatureSection features={features} />
+
+  <!-- About -->
+  <ImageAndText block={aboutBlock}>
+    <Prose size={'md'}>
+      <Content />
+    </Prose></ImageAndText
+  >
+
+  <!-- Testimonials -->
+  <TestimonialsSection testimonials={testimonials} />
+  <!-- Project Entries -->
+  <ProjectsSection projects={projects} />
+
+  <!-- Partners -->
+  <Section.Root className="px-0">
+    <Section.Content className="flex flex-col items-center gap-6">
+      <p class="typo-h2">Partners</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 items-center text-center w-full">
+        {
+          ['Stars', 'Rocket', , 'Moon', 'Sun'].map(item => (
+            <p class="bg-secondary rounded-xl font-bold text-2xl py-8 px-4 text-muted italic">{item}</p>
+          ))
+        }
+      </div>
+    </Section.Content>
+  </Section.Root>
+  <!-- Newsletter -->
+  <Section.Root type="card">
+    <Section.Content className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center text-center">
+      <div>
+        <h2 class="typo-h2">Join our Newsletter!</h2>
+        <p>Get updates and news when we launch a new rocket into space!</p>
+      </div>
+      <NewsletterForm client:load />
+    </Section.Content>
+  </Section.Root>
+</Layout>

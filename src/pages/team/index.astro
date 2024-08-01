@@ -1,0 +1,26 @@
+---
+import Section from '@/components/Section'
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+// Filter blog entries with 'draft: false' & date before current date
+const team = await getCollection('team')
+---
+
+<Layout title="Team">
+  <Section.Root>
+    <Section.Content className="max-w-optical">
+      <ul>
+        {
+          team.map(member => (
+            <li>
+              <a class="typo-a" href={`/team/${member.id}`}>
+                {member.data.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </Section.Content>
+  </Section.Root>
+</Layout>

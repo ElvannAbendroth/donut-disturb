@@ -1,0 +1,75 @@
+---
+import '../styles/globals.css'
+import { Toaster } from '@/components/ui/toaster'
+import { SEO } from 'astro-seo'
+import { siteConfig } from '@/utils/config'
+import { Navbar } from '@/components/Navbar'
+import ViewTransitions from 'astro/components/ViewTransitions.astro'
+import Footer from '@/components/Footer'
+
+export interface Props {
+  title: string
+  openGraphImage?: string
+  description?: string
+}
+const defaultOpenGraphImageURL = new URL('/opengraph.jpg', Astro.site).toString()
+
+const { title, description, openGraphImage = defaultOpenGraphImageURL } = Astro.props
+const { pathname } = Astro.url
+
+const canonicalURL = new URL(pathname, Astro.site).toString()
+
+const makeTitle = title ? title + ' | ' + 'Oodri' : 'Oodri - Web developer & UI/UX Designer'
+const defaultDescription = siteConfig.description
+
+const { user } = Astro.locals
+
+console.log(user)
+---
+
+<html lang="en" class="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <title>{title}</title>
+    <SEO
+      title={makeTitle}
+      description={description || defaultDescription}
+      canonical={canonicalURL}
+      openGraph={{
+        basic: {
+          url: canonicalURL,
+          type: 'website',
+          title: `${title}`,
+          image: openGraphImage,
+        },
+        optional: {
+          description: description,
+          siteName: 'Oodri | Web Developer & UI/UX Designer',
+        },
+        image: {
+          alt: title,
+        },
+      }}
+    />
+    <ViewTransitions />
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <Navbar client:load pathname={pathname} user={user} />
+
+    <main class="flex-grow p-2 w-full px-6 py-6 sm:py-8 sm:px-10">
+      <div class="flex flex-col gap-12 md:gap-16 max-w-layout mx-auto">
+        <slot />
+      </div>
+    </main>
+    <Footer />
+    <Toaster client:load />
+    <script src="../utils/themeSwitcher.ts"></script>
+    {user?.email && <script src="../utils/logout.ts" />}
+  </body>
+</html>

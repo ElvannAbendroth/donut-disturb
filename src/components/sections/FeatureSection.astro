@@ -1,0 +1,34 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import Section from '../Section'
+import { icons } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import Icon from '../ui/icon'
+
+interface Props {
+  features: CollectionEntry<'feature'>[]
+}
+const { features } = Astro.props
+---
+
+<Section.Root>
+  <Section.Content className="grid grid-cols-1  sm:grid-cols-3 gap-6 max-w-layout">
+    {
+      features?.map((feature, i) => {
+        if (feature.data.icon in icons)
+          return (
+            <Card className="text-center border-none shadow-none">
+              <CardHeader className="flex flex-col gap-3 items-center">
+                <Icon name={feature.data.icon as keyof typeof icons} size={36} className="text-accent" />
+                <CardTitle>{feature.data.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="max-w-optical">
+                <p>{feature.data.description}</p>
+              </CardContent>
+            </Card>
+          )
+        else throw new Error(`${feature.data.icon} is not a valid icon`)
+      })
+    }
+  </Section.Content>
+</Section.Root>

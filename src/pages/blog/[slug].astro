@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content'
+import Layout from '@/layouts/Layout.astro'
+import Prose from '@/components/Prose'
+import Section from '@/components/Section'
+import ArticleNav from '@/components/widgets/ArticleNav'
+import { findIndexById, getHeadings } from '@/utils/utils'
+import { getEntry } from 'astro:content'
+import HeroSection from '@/components/sections/HeroSection.astro'
+
+// Generate a new path for every collection entry
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog')
+
+  return blogEntries.map((entry, i) => {
+    const publishedEntries = blogEntries
+      .filter(entry => {
+        return !entry.data.draft && entry.data.publishDate < new Date()
+      })
+      .sort(function (a, b) {
+        return a.data.publishDate.valueOf() - b.data.publishDate.valueOf()
+      })
+
+    const currentArticleIndex = findIndexById(publishedEntries, entry.id)
+
+    const previous = publishedEntries[currentArticleIndex - 1]
+    const next = publishedEntries[currentArticleIndex + 1]
+
+    const headings = getHeadings(entry.body)
+
+    return {
+      params: { slug: entry.slug },
+      props: { entry, previous, next, headings },
+    }
+  })
+}
+
+// Get the entry directly from the prop on render
+const { entry, previous, next } = Astro.props
+const author = await getEntry('team', entry.data.author.id)
+const { Content } = await entry.render()
+export const prerender = true
+---
+
+<Layout title={entry.data.title} description={entry.data.snippet} openGraphImage={entry.data.image.src.src}>
+  <!-- Hero -->
+  <HeroSection
+    title={entry.data.title}
+    subtitle={`Published on ${entry.data.publishDate.toDateString()}`}
+    image={entry.data.image.src.src}
+  />
+  <Section.Root className="flex flex-col"
+    ><Section.Content className="flex flex-col gap-6 max-w-layout items-center mx-auto w-full">
+      <!-- <div id="breadcrumb" class="flex gap-2 items-center">
+          <Icon name="ChevronLeft" className="text-muted" size={18} />
+          <a href="/blog" class="typo-h5 mt-0 hover:underline text-muted font-semibold">Back to Blog</a>
+        </div> -->
+
+      <Prose><Content /></Prose>
+    </Section.Content></Section.Root
+  >
+  <Section.Root className="flex flex-col"
+    ><Section.Content className="flex flex-col gap-6 max-w-layout items-center mx-auto w-full">
+      <!-- <div id="breadcrumb" class="flex gap-2 items-center">
+          <Icon name="ChevronLeft" className="text-muted" size={18} />
+          <a href="/blog" class="typo-h5 mt-0 hover:underline text-muted font-semibold">Back to Blog</a>
+        </div> -->
+
+      <div class="flex flex-col gap-6 flex-grow w-full">
+        <ArticleNav previous={previous} next={next} />
+      </div>
+    </Section.Content></Section.Root
+  >
+</Layout>

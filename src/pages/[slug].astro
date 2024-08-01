@@ -1,0 +1,36 @@
+---
+import Prose from '@/components/Prose'
+import Section from '@/components/Section'
+import HeroSection from '@/components/sections/HeroSection.astro'
+
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const pageEntries = await getCollection('page')
+
+  return pageEntries.map((entry, i) => {
+    return {
+      params: { slug: entry.slug },
+      props: { entry },
+    }
+  })
+}
+
+const { entry } = Astro.props
+const { Content } = await entry.render()
+export const prerender = true
+---
+
+<Layout title={entry.data.title}>
+  <!-- Hero -->
+  <HeroSection title={entry.data.title} />
+
+  <Section.Root className="px-0 ">
+    <Section.Content className="flex flex-col gap-6">
+      <Prose>
+        <Content />
+      </Prose>
+    </Section.Content>
+  </Section.Root>
+</Layout>

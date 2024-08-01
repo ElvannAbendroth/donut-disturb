@@ -1,0 +1,46 @@
+---
+import Section from '@/components/Section'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { A, H1 } from '@/components/ui/typography'
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout title="Register">
+  <Section.Root className="bg-secondary rounded-md">
+    <Section.Content>
+      <div class="min-h-[calc(100vh-18rem)] flex items-center justify-center">
+        <div class="flex flex-col gap-8 items-center text-center w-full px-6 max-w-96">
+          <H1>Register</H1>
+          <p class="text-slate-600">Create your new account here</p>
+          <form class="flex flex-col gap-4 w-full" id="create-account">
+            <Input name="email" type="email" placeholder="email" type="email" />
+            <Input name="password" type="password" placeholder="password" type="password" />
+            <Button variant={'accent'}>Login</Button>
+            <button type="submit"></button>
+          </form>
+          <A href="/login">Login to an existing account here instead</A>
+        </div>
+      </div>
+    </Section.Content>
+  </Section.Root>
+  <script>
+    import { isInputError, actions } from 'astro:actions'
+
+    const createForm = document.querySelector('#create-account') as HTMLFormElement
+
+    createForm.addEventListener('submit', async e => {
+      e.preventDefault()
+      const { error, data } = await actions.createAccount.safe(new FormData(createForm))
+      if (error) {
+        console.log(error)
+        if (isInputError(error)) {
+          console.log(error.fields)
+        }
+        return
+      }
+
+      window.location.reload()
+    })
+  </script>
+</Layout>

@@ -1,0 +1,58 @@
+---
+import PostCard from '@/components/PostCard'
+import Section from '@/components/Section'
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import type { AstroBlogPagination } from '@/utils/types'
+import BlogPagination from '@/components/BlogPagination'
+import HeroSection from '@/components/sections/HeroSection.astro'
+
+export async function getStaticPaths({ paginate }: { paginate: Function }): Promise<AstroBlogPagination> {
+  // Filter blog entries with 'draft: false' & date before current date
+  const publishedBlogEntries = await getCollection('blog', ({ data }) => {
+    return !data.draft && data.publishDate < new Date()
+  })
+
+  // Sort content entries by publication date
+  publishedBlogEntries.sort(function (a, b) {
+    return b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+  })
+
+  const paginatedData = paginate(publishedBlogEntries, {
+    pageSize: 4,
+  })
+
+  return paginatedData
+}
+
+const { page } = Astro.props
+
+const pageTyped = page as AstroBlogPagination
+const posts = pageTyped.data
+
+export const prerender = true
+---
+
+<Layout title="Blog">
+  <!-- Hero -->
+  <HeroSection title="Blog" />
+  <!-- Project Entries -->
+  <Section.Root>
+    <Section.Content className="flex flex-col gap-8">
+      <ul class="flex flex-col gap-6">
+        {
+          posts.map(async (entry, i) => {
+            const { Content } = await entry.render()
+            return <PostCard post={entry} i={i} />
+          })
+        }
+      </ul>
+      <BlogPagination
+        lastPage={pageTyped.lastPage}
+        next={pageTyped.url.next}
+        prev={pageTyped.url.prev}
+        currentPage={pageTyped.currentPage}
+      />
+    </Section.Content>
+  </Section.Root>
+</Layout>

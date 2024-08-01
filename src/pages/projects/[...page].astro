@@ -1,0 +1,60 @@
+---
+import Section from '@/components/Section'
+
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+import type { AstroProjectPagination } from '@/utils/types'
+import BlogPagination from '@/components/BlogPagination'
+import HeroSection from '@/components/sections/HeroSection.astro'
+import ProjectCard from '@/components/ProjectCard'
+
+export async function getStaticPaths({ paginate }: { paginate: Function }): Promise<AstroProjectPagination> {
+  // Filter blog entries with 'draft: false' & date before current date
+  const publishedProjectEntries = await getCollection('project', ({ data }) => {
+    return !data.draft && data.publishDate < new Date()
+  })
+
+  // Sort content entries by publication date
+  publishedProjectEntries.sort(function (a, b) {
+    return b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+  })
+
+  const paginatedData = paginate(publishedProjectEntries, {
+    pageSize: 4,
+  })
+
+  return paginatedData
+}
+
+const { page } = Astro.props
+
+const pageTyped = page as AstroProjectPagination
+const posts = pageTyped.data
+
+export const prerender = true
+---
+
+<Layout title="Projects">
+  <!-- Hero -->
+  <HeroSection title={'Projects'} />
+
+  <!-- Project Entries -->
+  <Section.Root>
+    <Section.Content className="flex flex-col gap-8">
+      <ul class="flex flex-col gap-6">
+        {
+          posts.map((entry, i) => {
+            return <ProjectCard project={entry} i={i} />
+          })
+        }
+      </ul>
+      <BlogPagination
+        lastPage={pageTyped.lastPage}
+        next={pageTyped.url.next}
+        prev={pageTyped.url.prev}
+        currentPage={pageTyped.currentPage}
+      />
+    </Section.Content>
+  </Section.Root>
+</Layout>

@@ -1,0 +1,54 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import Section from '../Section'
+import { Button } from '../ui/button'
+import { H2 } from '../ui/typography'
+
+interface Props {
+  projects: CollectionEntry<'project'>[]
+  maxItems?: number
+}
+
+const { projects, maxItems } = Astro.props
+---
+
+<Section.Root>
+  <Section.Content className="flex flex-col gap-12 sm:gap-16 py-0 items-center">
+    <>
+      {
+        projects.map((project, i) => {
+          const {
+            data: { title, description },
+          } = project
+          if ((maxItems && i < maxItems) || !maxItems)
+            return (
+              <div class=" max-w-layout w-full hover:opacity-85 transition-all">
+                <a href={`/projects/${project.slug}`} class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 w-full">
+                  <img
+                    src={project.data.image?.src.src}
+                    alt={title}
+                    class={`${
+                      i % 2 === 0 ? 'md:order-last' : 'order-first'
+                    } bg-secondary rounded-lg min-h-64 aspect-video object-cover`}
+                  />
+                  <span class="flex flex-col gap-4 justify-center w-full">
+                    <span class={`flex flex-col gap-2  ${i % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                      <H2>{title}</H2>
+                      <p>{description}</p>
+                    </span>
+                  </span>
+                </a>
+              </div>
+            )
+        })
+      }
+    </>
+    {
+      maxItems && (
+        <a href="/projects">
+          <Button icon="Rocket">More Case Studies</Button>
+        </a>
+      )
+    }
+  </Section.Content>
+</Section.Root>
