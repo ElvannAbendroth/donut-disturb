@@ -1,19 +1,15 @@
 ---
 import Prose from '@/components/Prose'
 import Section from '@/components/Section'
-import NewsletterForm from '@/components/NewsletterForm'
 import Layout from '@/layouts/Layout.astro'
 import { siteConfig } from '@/utils/config'
 import HeroSection from '@/components/sections/HeroSection.astro'
-import FeatureSection from '@/components/sections/FeatureSection.astro'
+
 import { getCollection, getEntry } from 'astro:content'
-import ImageAndText from '@/components/sections/ImageAndText'
-import TestimonialsSection from '@/components/sections/TestimonialsSection.astro'
+
 import ProjectsSection from '@/components/sections/ProjectsSection.astro'
 
 const aboutBlock = await getEntry('block', 'about')
-const features = await getCollection('feature')
-const testimonials = await getCollection('testimonial')
 const projects = await getCollection('project')
 
 const { Content } = await aboutBlock.render()
@@ -22,5 +18,6 @@ export const prerender = true
 ---
 
 <Layout title={siteConfig.name}>
-  <ProjectsSection projects={projects} />
+  <HeroSection title="Donut Disturb" />
+  <!-- <ProjectsSection projects={projects} /> -->
 </Layout>

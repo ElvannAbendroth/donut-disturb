@@ -24,7 +24,7 @@ export const siteConfig: SiteConfig = {
   },
 }
 
-export const navItems: NavItem[] = []
+export const navItems: NavItem[] = [{ label: 'Quiz', href: '/quiz', type: 'link' }]
 
 export const footerLinksCol1 = {
   title: 'Links',

@@ -3,8 +3,8 @@ const darkTheme = {
     border: '#1e293b',
     input: '#1e293b',
     ring: '#cbd5e1',
-    background: '#020817',
-    foreground: '#f8fafc',
+    background: '#241A4F',
+    foreground: '#CEC5E7',
     primary: {
       DEFAULT: '#f8fafc',
       foreground: '#0f172a',

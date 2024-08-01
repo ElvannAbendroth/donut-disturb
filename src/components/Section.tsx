@@ -7,7 +7,7 @@ interface RootProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Root: FC<RootProps> = ({ className, type, children }) => {
   return (
-    <section className={cn(`w-full  ${type === 'card' && 'py-12 px-8 rounded-lg bg-secondary'}`, className)}>
+    <section className={cn(`w-full  ${type === 'card' && 'py-12 px-8 rounded-3xl bg-secondary'}`, className)}>
       {children}
     </section>
   )
