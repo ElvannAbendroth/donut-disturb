@@ -21,4 +21,6 @@ const { Content } = await aboutBlock.render()
 export const prerender = true
 ---
 
-<Layout title={siteConfig.name} />
+<Layout title={siteConfig.name}>
+  <ProjectsSection projects={projects} />
+</Layout>

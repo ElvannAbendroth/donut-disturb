@@ -8,14 +8,6 @@ import ThemeToggle from './ThemeToggle'
 import { Button } from './ui/button'
 import Logo from './Logo'
 import { actions } from 'astro:actions'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 
 import { isInputError } from 'astro:actions'
 
@@ -29,23 +21,7 @@ interface NavbarProps {
     | undefined
 }
 
-//React version of Navbar
 export const Navbar: FC<NavbarProps> = ({ pathname, user }) => {
-  const logout = async (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault()
-    // @ts-ignore:next-line
-    const { error, data } = await actions.logoutAccount.safe()
-    if (error) {
-      console.log(error)
-      if (isInputError(error)) {
-        console.log(error.fields)
-      }
-      return
-    }
-
-    window.location.reload()
-    console.log('het')
-  }
   return (
     <nav className="bg-background/50 px-4 py-4 md:py-4 md:px-8 m-2 rounded-full ">
       <div className="flex justify-between max-w-layout mx-auto">

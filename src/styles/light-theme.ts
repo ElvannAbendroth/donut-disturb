@@ -26,8 +26,8 @@ const lightTheme = {
       foreground: '#ffffff',
     },
     accent2: {
-      DEFAULT: '#e07c7d',
-      foreground: '#020817',
+      DEFAULT: '#E49C80',
+      foreground: '#ffffff',
     },
     popover: {
       DEFAULT: '#ffffff',

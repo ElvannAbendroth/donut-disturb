@@ -23,7 +23,7 @@ export default {
       },
       fontFamily: {
         display: ['Minecrafter', ...defaultTheme.fontFamily.sans],
-        header: ['Inter', ...defaultTheme.fontFamily.sans],
+        header: ['Minecrafter', ...defaultTheme.fontFamily.sans],
         body: ['Lato', ...defaultTheme.fontFamily.sans],
       },
       maxWidth: {

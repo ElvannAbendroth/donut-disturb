@@ -1,10 +1,10 @@
 ---
 draft: false
 publishDate: "2024-06-05 12:00"
-title: Admire Space
-description: "In this project, admired the vastness and emptiness of space."
+title: "Quiz: What Donut Are You?"
+description: "Wanna know what kind of donut reflects your personality?  Don't wait any further, take this quiz!"
 image: {
-    src: "admire-space.png",
+    src: "quiz.png",
     alt: "Placeholder Post"
 }
 

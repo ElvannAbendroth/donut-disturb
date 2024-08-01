@@ -1,22 +1,22 @@
 @layer components {
   .typo-title {
-    @apply font-header scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-7xl;
+    @apply font-header scroll-m-20 text-4xl tracking-wider lg:text-6xl;
   }
 
   .typo-h1 {
-    @apply font-header scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+    @apply font-header scroll-m-20 text-3xl tracking-widest lg:text-4xl;
   }
 
   .typo-h2 {
-    @apply font-header mt-10 scroll-m-20 pb-2 text-3xl font-bold tracking-tight transition-colors first:mt-0 leading-6;
+    @apply font-header mt-10 scroll-m-20 pb-2 text-2xl tracking-widest transition-colors first:mt-0 leading-6;
   }
 
   .typo-h3 {
-    @apply font-header mt-8 scroll-m-20 text-2xl font-bold tracking-tight leading-7;
+    @apply font-header mt-8 scroll-m-20 text-2xl tracking-widest leading-7;
   }
 
   .typo-h4 {
-    @apply font-header scroll-m-20 text-xl font-semibold tracking-tight;
+    @apply font-header scroll-m-20 text-xl font-semibold tracking-wider;
   }
 
   .typo-p {
