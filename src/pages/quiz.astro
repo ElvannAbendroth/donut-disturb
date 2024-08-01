@@ -2,10 +2,15 @@
 import Layout from '@/layouts/Layout.astro'
 import { siteConfig } from '@/utils/config'
 import HeroSection from '@/components/sections/HeroSection.astro'
+import DonutQuizSection from '@/components/sections/DonutQuizSection'
 import Section from '@/components/Section'
-import { H2 } from '@/components/ui/typography'
 ---
 
 <Layout title={siteConfig.name}>
-  <HeroSection title="What Donut are you?" />
+  <HeroSection
+    preTitle="QUIZ"
+    title="What type of Donut are you?"
+    subtitle="Ever wondered what kind of donut you are?  Wait no further!  Take the quiz and discover which donut fits your personality best!"
+  />
+  <DonutQuizSection client:load />
 </Layout>

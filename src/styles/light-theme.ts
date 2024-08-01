@@ -22,7 +22,7 @@ const lightTheme = {
       foreground: '#ffffff', // Muted Grey
     },
     accent: {
-      DEFAULT: '#7e5cb7',
+      DEFAULT: '#DB739F',
       foreground: '#ffffff',
     },
     accent2: {
