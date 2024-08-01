@@ -1,8 +1,8 @@
 import type { Feature, NavItem, SiteConfig, Social, Testimonial, FooterLinksCol } from '@/utils/types'
 
 export const siteConfig: SiteConfig = {
-  name: 'Rock Your Astro',
-  description: 'A simple Astro starter template with dark theme support using Shadcn UI & Tailwind',
+  name: 'Donut Disturb',
+  description: 'Donut Distrub is a series of mini donut-related games for donut lovers.',
   url: 'http://rock-your-astro.vercel.app/',
   ogImage: 'https://tx.shadcn.com/og.jpg',
   links: {
@@ -24,18 +24,7 @@ export const siteConfig: SiteConfig = {
   },
 }
 
-export const navItems: NavItem[] = [
-  { label: 'About', href: '/about', type: 'link' },
-  { label: 'Blog', href: '/blog', type: 'link' },
-  { label: 'Projects', href: '/projects', type: 'link' },
-  { label: 'Contact', href: '/contact', type: 'link' },
-  {
-    label: 'Visit Repo',
-    href: 'https://github.com/ElvannAbendroth/rock-your-astro',
-    type: 'button',
-    icon: 'Github',
-  },
-]
+export const navItems: NavItem[] = []
 
 export const footerLinksCol1 = {
   title: 'Links',

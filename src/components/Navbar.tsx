@@ -16,8 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { signOut } from 'firebase/auth'
-import { projectAuth } from '@/utils/firebase'
+
 import { isInputError } from 'astro:actions'
 
 interface NavbarProps {
@@ -48,38 +47,12 @@ export const Navbar: FC<NavbarProps> = ({ pathname, user }) => {
     console.log('het')
   }
   return (
-    <nav className="bg-background px-4 py-4 md:py-6 md:px-8 ">
+    <nav className="bg-background/50 px-4 py-4 md:py-4 md:px-8 m-2 rounded-full ">
       <div className="flex justify-between max-w-layout mx-auto">
         <Logo />
         <div className="flex flex-gap-12 items-center gap-4 ">
           <DesktopMenu navItems={navItems} className="hidden md:block" pathname={pathname} user={user} />
           <MobileMenu navItems={navItems} className="block md:hidden" pathname={pathname} user={user} />
-          <div className="flex flex-row items-center gap-2 font-bold text-sm flex-wrap">
-            {user?.email ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger className="rounded-full">
-                  {' '}
-                  <p className="size-8 bg-input rounded-full flex items-center justify-center font-bold">
-                    {user.email[0].toUpperCase()}
-                  </p>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" sideOffset={12}>
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-
-                  <DropdownMenuItem className="flex gap-2 cursor-pointer" onClick={e => logout(e)}>
-                    <Icon name="LogOut" className="size-4" /> Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <a href="/login">
-                <Button variant={'ghost'} className="px-3">
-                  <Icon name="LogIn" size={16} strokeWidth={2.3} />
-                </Button>
-              </a>
-            )}
-          </div>
         </div>
       </div>
     </nav>
@@ -121,14 +94,13 @@ export const DesktopMenu: FC<DesktopMenuProps> = ({ navItems, className, pathnam
             return (
               <li key={item.label} className="align-middle self-center">
                 <a href={item.href} target={item.target || '_self'}>
-                  <Button icon={item.icon}>{item.label}</Button>
+                  <Button icon={item.icon} size={'sm'}>
+                    {item.label}
+                  </Button>
                 </a>
               </li>
             )
         })}
-        <li className="flex flex-row items-center gap-2 lowercase font-bold text-sm">
-          <ThemeToggle variant="desktop" />
-        </li>
       </ul>
     </div>
   )
@@ -180,11 +152,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ navItems, className, pat
                   </li>
                 )
             })}
-
-            <hr />
-            <li className="flex flex-row justify-center gap-2 lowercase font-bold text-sm">
-              <ThemeToggle variant="mobile" />
-            </li>
           </ul>
         </SheetContent>
       </Sheet>

@@ -22,7 +22,7 @@ export default {
         current: 'currentColor',
       },
       fontFamily: {
-        display: [...defaultTheme.fontFamily.sans],
+        display: ['Minecrafter', ...defaultTheme.fontFamily.sans],
         header: ['Inter', ...defaultTheme.fontFamily.sans],
         body: ['Lato', ...defaultTheme.fontFamily.sans],
       },

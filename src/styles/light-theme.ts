@@ -4,10 +4,10 @@ const lightTheme = {
     input: '#e2e8f0',
     ring: '#020817',
     background: '#ffffff',
-    foreground: '#020817',
+    foreground: '#685B9E',
     primary: {
-      DEFAULT: '#0f172a',
-      foreground: '#f8fafc',
+      DEFAULT: '#685B9E',
+      foreground: '#ffffff',
     },
     secondary: {
       DEFAULT: '#f1f5f9',
@@ -18,7 +18,7 @@ const lightTheme = {
       foreground: '#020817',
     },
     muted: {
-      DEFAULT: '#a1a1a1',
+      DEFAULT: '#bbaed1',
       foreground: '#ffffff', // Muted Grey
     },
     accent: {

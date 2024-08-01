@@ -22,7 +22,7 @@ const Footer: FC<FooterProps> = () => {
             })}
           </div>
         </div>
-        <div className="col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-8">
+        {/* <div className="col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-8">
           <div className="flex flex-col gap-2">
             <h3 className="font-bold">{footerLinksCol1.title}</h3>
             <ul>
@@ -57,7 +57,7 @@ const Footer: FC<FooterProps> = () => {
               <p>{siteConfig.address.country}</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="flex justify-center py-3">
         <p className="text-muted text-sm">{siteConfig.copyright}</p>
