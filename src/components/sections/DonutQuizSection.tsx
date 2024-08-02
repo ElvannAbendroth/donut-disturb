@@ -4,6 +4,7 @@ import { H1, H2 } from '../ui/typography'
 import { Button } from '../ui/button'
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
 import { Label } from '../ui/label'
+import type { CollectionEntry } from 'astro:content'
 
 type DonutTopping = 'Glazed' | 'White Chocolate' | 'Boston Cream' | 'Maple Bacon'
 
@@ -18,9 +19,11 @@ type Question = {
   answer: Answer
 }
 
-interface DonutQuizSectionProps {}
+interface DonutQuizSectionProps {
+  donuts: CollectionEntry<'donut'>[]
+}
 
-const DonutQuizSection: FC<DonutQuizSectionProps> = () => {
+const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts }) => {
   const quizInit: Question[] = [
     {
       id: 1,
@@ -60,8 +63,6 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = () => {
     )
     setQuiz(updatedQuiz)
     updateScore(updatedQuiz)
-
-    console.log(updatedQuiz)
   }
 
   const updateScore = (updatedQuiz: Question[]) => {
@@ -85,8 +86,11 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = () => {
     }
 
     const randomIndex = Math.floor(Math.random() * topDonuts.length)
-    return topDonuts[randomIndex].name
+    const topDonutName = topDonuts[randomIndex].name
+    return topDonutName
   }
+
+  const getDonutEntry = () => donuts.find(donut => donut.data.title === getTopDonut())
 
   return (
     <>
@@ -132,6 +136,9 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = () => {
           <Section.Content>
             <H2>Your Donut Personality</H2>
             <p>{getTopDonut()}</p>
+            <a href={`/quiz/${getDonutEntry()?.slug}`}>
+              <Button>Check your donut personality</Button>
+            </a>
           </Section.Content>
         </Section.Root>
       )}

@@ -3,50 +3,35 @@ import { getCollection } from 'astro:content'
 import Layout from '@/layouts/Layout.astro'
 import Prose from '@/components/Prose'
 import Section from '@/components/Section'
-import ArticleNav from '@/components/widgets/ArticleNav'
-import { findIndexById, getHeadings } from '@/utils/utils'
+import { getHeadings } from '@/utils/utils'
 import HeroSection from '@/components/sections/HeroSection.astro'
+import { Button } from '@/components/ui/button'
 
 // Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog')
+  const donutEntries = await getCollection('donut')
 
-  return blogEntries.map((entry, i) => {
-    const publishedEntries = blogEntries
-      .filter(entry => {
-        return !entry.data.draft && entry.data.publishDate < new Date()
-      })
-      .sort(function (a, b) {
-        return a.data.publishDate.valueOf() - b.data.publishDate.valueOf()
-      })
-
-    const currentArticleIndex = findIndexById(publishedEntries, entry.id)
-
-    const previous = publishedEntries[currentArticleIndex - 1]
-    const next = publishedEntries[currentArticleIndex + 1]
+  return donutEntries.map((entry, i) => {
+    const publishedEntries = donutEntries
 
     const headings = getHeadings(entry.body)
 
     return {
       params: { slug: entry.slug },
-      props: { entry, previous, next, headings },
+      props: { entry, headings },
     }
   })
 }
 
 // Get the entry directly from the prop on render
-const { entry, previous, next } = Astro.props
+const { entry, headings } = Astro.props
 const { Content } = await entry.render()
 export const prerender = true
 ---
 
 <Layout title={entry.data.title} description={entry.data.snippet} openGraphImage={entry.data.image.src.src}>
   <!-- Hero -->
-  <HeroSection
-    title={entry.data.title}
-    subtitle={`Published on ${entry.data.publishDate.toDateString()}`}
-    image={entry.data.image.src.src}
-  />
+  <HeroSection title={entry.data.title} image={entry.data.image.src.src} />
   <Section.Root className="flex flex-col"
     ><Section.Content className="flex flex-col gap-6 max-w-layout items-center mx-auto w-full">
       <Prose><Content /></Prose>
@@ -55,7 +40,7 @@ export const prerender = true
   <Section.Root className="flex flex-col"
     ><Section.Content className="flex flex-col gap-6 max-w-layout items-center mx-auto w-full">
       <div class="flex flex-col gap-6 flex-grow w-full">
-        <ArticleNav previous={previous} next={next} />
+        <a href="/quiz"><Button>Return</Button></a>
       </div>
     </Section.Content></Section.Root
   >

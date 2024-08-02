@@ -53,6 +53,19 @@ const featureCollection = defineCollection({
     }),
 })
 
+const donutCollection = defineCollection({
+  type: 'content',
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      snippet: z.string(),
+      image: z.object({
+        src: image(),
+        alt: z.string(),
+      }),
+    }),
+})
+
 // 3. Export a single `collections` object to register your collection(s)
 //    This key should match your collection directory name in "src/content"
 export const collections = {
@@ -60,4 +73,5 @@ export const collections = {
   page: pageCollection,
   project: projectCollection,
   feature: featureCollection,
+  donut: donutCollection,
 }

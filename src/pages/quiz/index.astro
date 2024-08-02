@@ -1,8 +1,11 @@
 ---
+import { getCollection } from 'astro:content'
 import Layout from '@/layouts/Layout.astro'
 import { siteConfig } from '@/utils/config'
 import HeroSection from '@/components/sections/HeroSection.astro'
 import DonutQuizSection from '@/components/sections/DonutQuizSection'
+
+const donutEntries = await getCollection('donut')
 ---
 
 <Layout title={siteConfig.name}>
@@ -11,5 +14,5 @@ import DonutQuizSection from '@/components/sections/DonutQuizSection'
     title="What type of Donut are you?"
     subtitle="Ever wondered what kind of donut you are?  Wait no further!  Take the quiz and discover which donut fits your personality best!"
   />
-  <DonutQuizSection client:load />
+  <DonutQuizSection client:load donuts={donutEntries} />
 </Layout>
