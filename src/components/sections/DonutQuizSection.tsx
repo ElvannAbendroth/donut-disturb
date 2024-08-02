@@ -48,68 +48,47 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts }) => {
       answer: null,
     },
   ]
-  const scoreInit = [
-    { name: 'Glazed', count: 0 },
-    { name: 'White Chocolate', count: 0 },
-    { name: 'Boston Cream', count: 0 },
-    { name: 'Maple Bacon', count: 0 },
-  ]
+
   const [quiz, setQuiz] = useState(quizInit)
-  const [score, setScore] = useState(scoreInit)
 
   const answerQuestion = (questionIndex: number, selectedTopping: DonutTopping) => {
     const updatedQuiz = quiz.map((question, index) =>
       index === questionIndex ? { ...question, answer: selectedTopping } : question
     )
     setQuiz(updatedQuiz)
-    updateScore(updatedQuiz)
   }
 
-  const updateScore = (updatedQuiz: Question[]) => {
-    const newScore = scoreInit.map(donut => ({
-      ...donut,
-      count: updatedQuiz.filter(question => question.answer === donut.name).length,
-    }))
-    setScore(newScore)
-  }
+  const score = quiz
+    .filter(question => question.answer !== null)
+    .reduce((acc, curQuestion) => {
+      const topping = curQuestion.answer!
+      const curScoreForTopping = acc[topping] ?? 0
+      return { ...acc, [topping]: curScoreForTopping + 1 }
+    }, {} as { [key: string]: number })
 
-  const calculateTotalPoints = () => {
-    return score.reduce((total, donut) => (total += donut.count), 0)
-  }
+  const topDonutName = Object.entries(score).toSorted((a, b) => b[1] - a[1])[0]?.[0]
+  const topDonut = donuts.find(d => d.data.title === topDonutName)
 
-  const getTopDonut = () => {
-    const maxScore = Math.max(...score.map(donut => donut.count))
-    const topDonuts = score.filter(donut => donut.count === maxScore)
-
-    if (topDonuts.length === 1) {
-      return topDonuts[0].name
-    }
-
-    const randomIndex = Math.floor(Math.random() * topDonuts.length)
-    const topDonutName = topDonuts[randomIndex].name
-    return topDonutName
-  }
-
-  const getDonutEntry = () => donuts.find(donut => donut.data.title === getTopDonut())
+  const hasUnansweredQuestions = quiz.some(question => question.answer === null)
 
   return (
     <>
-      <Section.Root type={'card'}>
+      {/* <Section.Root type={'card'}>
         <Section.Content>
           <div>
             <ul className="grid grid-cols-4">
-              {score.map(stat => {
+              {Object.entries(score).map(([name, count]) => {
                 return (
-                  <li key={stat.name} className="flex flex-col gap-2 items-center">
-                    <H1 className="">{stat.count}</H1>
-                    <span>{stat.name}</span>
+                  <li key={name} className="flex flex-col gap-2 items-center">
+                    <H1 className="">{count}</H1>
+                    <span>{name}</span>
                   </li>
                 )
               })}
             </ul>
           </div>
         </Section.Content>
-      </Section.Root>
+      </Section.Root> */}
 
       {quiz.map((question, questionIndex) => {
         return (
@@ -131,12 +110,12 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts }) => {
           </Section.Root>
         )
       })}
-      {quiz.length === calculateTotalPoints() && (
+      {!hasUnansweredQuestions && (
         <Section.Root type={'card'}>
           <Section.Content>
             <H2>Your Donut Personality</H2>
-            <p>{getTopDonut()}</p>
-            <a href={`/quiz/${getDonutEntry()?.slug}`}>
+            <p>{topDonut?.data.title}</p>
+            <a href={`/quiz/${topDonut?.slug}`}>
               <Button>Check your donut personality</Button>
             </a>
           </Section.Content>
