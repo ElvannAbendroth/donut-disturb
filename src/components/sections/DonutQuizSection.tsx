@@ -1,4 +1,4 @@
-import { useEffect, useState, type FC } from 'react'
+import { useState, type FC } from 'react'
 import Section from '../Section'
 import { H1, H2 } from '../ui/typography'
 import { Button } from '../ui/button'
@@ -72,11 +72,25 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = () => {
     setScore(newScore)
   }
 
-  useEffect(() => {}, [quiz])
+  const calculateTotalPoints = () => {
+    return score.reduce((total, donut) => (total += donut.count), 0)
+  }
+
+  const getTopDonut = () => {
+    const maxScore = Math.max(...score.map(donut => donut.count))
+    const topDonuts = score.filter(donut => donut.count === maxScore)
+
+    if (topDonuts.length === 1) {
+      return topDonuts[0].name
+    }
+
+    const randomIndex = Math.floor(Math.random() * topDonuts.length)
+    return topDonuts[randomIndex].name
+  }
 
   return (
     <>
-      <Section.Root type={'card'}>
+      {/* <Section.Root type={'card'}>
         <Section.Content>
           <div>
             <ul className="grid grid-cols-4">
@@ -90,9 +104,8 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = () => {
               })}
             </ul>
           </div>
-          <div></div>
         </Section.Content>
-      </Section.Root>
+      </Section.Root> */}
 
       {quiz.map((question, questionIndex) => {
         return (
@@ -114,6 +127,14 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = () => {
           </Section.Root>
         )
       })}
+      {quiz.length === calculateTotalPoints() && (
+        <Section.Root type={'card'}>
+          <Section.Content>
+            <H2>Your Donut Personality</H2>
+            <p>{getTopDonut()}</p>
+          </Section.Content>
+        </Section.Root>
+      )}
     </>
   )
 }

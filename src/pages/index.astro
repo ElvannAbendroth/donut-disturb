@@ -1,23 +1,15 @@
 ---
-import Prose from '@/components/Prose'
-import Section from '@/components/Section'
 import Layout from '@/layouts/Layout.astro'
 import { siteConfig } from '@/utils/config'
 import HeroSection from '@/components/sections/HeroSection.astro'
 
-import { getCollection, getEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
 
-import ProjectsSection from '@/components/sections/ProjectsSection.astro'
-
-const aboutBlock = await getEntry('block', 'about')
 const projects = await getCollection('project')
-
-const { Content } = await aboutBlock.render()
 
 export const prerender = true
 ---
 
 <Layout title={siteConfig.name}>
   <HeroSection title="Donut Disturb" />
-  <!-- <ProjectsSection projects={projects} /> -->
 </Layout>
