@@ -21,9 +21,10 @@ type Question = {
 
 interface DonutQuizSectionProps {
   donuts: CollectionEntry<'donut'>[]
+  questions: CollectionEntry<'question'>[]
 }
 
-const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts }) => {
+const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts, questions }) => {
   const quizInit: Question[] = [
     {
       id: 1,

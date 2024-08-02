@@ -6,6 +6,7 @@ import HeroSection from '@/components/sections/HeroSection.astro'
 import DonutQuizSection from '@/components/sections/DonutQuizSection'
 
 const donutEntries = await getCollection('donut')
+const questionEntries = await getCollection('question')
 ---
 
 <Layout title={siteConfig.name}>
@@ -14,5 +15,5 @@ const donutEntries = await getCollection('donut')
     title="What type of Donut are you?"
     subtitle="Ever wondered what kind of donut you are?  Wait no further!  Take the quiz and discover which donut fits your personality best!"
   />
-  <DonutQuizSection client:load donuts={donutEntries} />
+  <DonutQuizSection client:load donuts={donutEntries} questions={questionEntries} />
 </Layout>
