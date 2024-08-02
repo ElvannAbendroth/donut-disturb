@@ -19,58 +19,30 @@ type Question = {
   answer: Answer
 }
 
+type QuestionDefinition = CollectionEntry<'question'>
+
 interface DonutQuizSectionProps {
   donuts: CollectionEntry<'donut'>[]
-  questions: CollectionEntry<'question'>[]
+  questions: QuestionDefinition[]
 }
 
 const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts, questions }) => {
-  const quizInit: Question[] = [
-    {
-      id: 1,
-      question: "What's your favorite color?",
-      options: [
-        { topping: 'Glazed', text: 'Pink' },
-        { topping: 'White Chocolate', text: 'White' },
-        { topping: 'Boston Cream', text: 'Brown' },
-        { topping: 'Maple Bacon', text: 'Gold' },
-      ],
-      answer: null,
-    },
-    {
-      id: 2,
-      question: 'Where are you from?',
-      options: [
-        { topping: 'Glazed', text: 'Finland' },
-        { topping: 'White Chocolate', text: 'Russia' },
-        { topping: 'Boston Cream', text: 'USA' },
-        { topping: 'Maple Bacon', text: 'Canada' },
-      ],
-      answer: null,
-    },
-  ]
+  const [answers, setAnswers] = useState<Map<QuestionDefinition, DonutTopping>>(new Map())
 
-  const [quiz, setQuiz] = useState(quizInit)
-
-  const answerQuestion = (questionIndex: number, selectedTopping: DonutTopping) => {
-    const updatedQuiz = quiz.map((question, index) =>
-      index === questionIndex ? { ...question, answer: selectedTopping } : question
-    )
-    setQuiz(updatedQuiz)
+  const answerQuestion = (question: QuestionDefinition, selectedTopping: DonutTopping) => {
+    const clonedAnswers = new Map(answers)
+    setAnswers(clonedAnswers.set(question, selectedTopping))
   }
 
-  const score = quiz
-    .filter(question => question.answer !== null)
-    .reduce((acc, curQuestion) => {
-      const topping = curQuestion.answer!
-      const curScoreForTopping = acc[topping] ?? 0
-      return { ...acc, [topping]: curScoreForTopping + 1 }
-    }, {} as { [key: string]: number })
+  const score = Array.from(answers.values()).reduce((acc, topping) => {
+    const curScoreForTopping = acc[topping] ?? 0
+    return { ...acc, [topping]: curScoreForTopping + 1 }
+  }, {} as { [key: string]: number })
 
   const topDonutName = Object.entries(score).toSorted((a, b) => b[1] - a[1])[0]?.[0]
   const topDonut = donuts.find(d => d.data.title === topDonutName)
 
-  const hasUnansweredQuestions = quiz.some(question => question.answer === null)
+  const hasUnansweredQuestions = answers.size < questions.length
 
   return (
     <>
@@ -91,18 +63,18 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts, questions }) => {
         </Section.Content>
       </Section.Root> */}
 
-      {quiz.map((question, questionIndex) => {
+      {questions.map(question => {
         return (
-          <Section.Root type={'card'} key={question.question}>
+          <Section.Root type={'card'} key={question.data.question}>
             <Section.Content>
-              <H2>{question.question}</H2>
+              <H2>{question.data.question}</H2>
 
-              <RadioGroup onValueChange={value => answerQuestion(questionIndex, value as DonutTopping)}>
-                {question.options.map(option => {
+              <RadioGroup onValueChange={value => answerQuestion(question, value as DonutTopping)}>
+                {Object.entries(question.data.options).map(option => {
                   return (
-                    <div key={option.text + option.topping} className="flex items-center space-x-2">
-                      <RadioGroupItem value={option.topping} id={option.text + option.topping} />
-                      <Label htmlFor={option.text + option.topping}>{option.text}</Label>
+                    <div key={option[0] + option[1]} className="flex items-center space-x-2">
+                      <RadioGroupItem value={option[0]} id={option[1] + option[0]} />
+                      <Label htmlFor={option[1] + option[0]}>{option[1]}</Label>
                     </div>
                   )
                 })}

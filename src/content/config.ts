@@ -72,7 +72,6 @@ const questionCollection = defineCollection({
     z.object({
       question: z.string(),
       options: z.record(z.string(), z.string()),
-      answer: z.null() || z.string(),
     }),
 })
 
