@@ -37,7 +37,6 @@ export async function getStaticPaths() {
 
 // Get the entry directly from the prop on render
 const { entry, previous, next } = Astro.props
-const author = await getEntry('team', entry.data.author.id)
 const { Content } = await entry.render()
 export const prerender = true
 ---
@@ -51,21 +50,11 @@ export const prerender = true
   />
   <Section.Root className="flex flex-col"
     ><Section.Content className="flex flex-col gap-6 max-w-layout items-center mx-auto w-full">
-      <!-- <div id="breadcrumb" class="flex gap-2 items-center">
-          <Icon name="ChevronLeft" className="text-muted" size={18} />
-          <a href="/blog" class="typo-h5 mt-0 hover:underline text-muted font-semibold">Back to Blog</a>
-        </div> -->
-
       <Prose><Content /></Prose>
     </Section.Content></Section.Root
   >
   <Section.Root className="flex flex-col"
     ><Section.Content className="flex flex-col gap-6 max-w-layout items-center mx-auto w-full">
-      <!-- <div id="breadcrumb" class="flex gap-2 items-center">
-          <Icon name="ChevronLeft" className="text-muted" size={18} />
-          <a href="/blog" class="typo-h5 mt-0 hover:underline text-muted font-semibold">Back to Blog</a>
-        </div> -->
-
       <div class="flex flex-col gap-6 flex-grow w-full">
         <ArticleNav previous={previous} next={next} />
       </div>
