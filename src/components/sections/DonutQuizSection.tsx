@@ -94,7 +94,7 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts }) => {
 
   return (
     <>
-      {/* <Section.Root type={'card'}>
+      <Section.Root type={'card'}>
         <Section.Content>
           <div>
             <ul className="grid grid-cols-4">
@@ -109,7 +109,7 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts }) => {
             </ul>
           </div>
         </Section.Content>
-      </Section.Root> */}
+      </Section.Root>
 
       {quiz.map((question, questionIndex) => {
         return (
@@ -120,9 +120,9 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts }) => {
               <RadioGroup onValueChange={value => answerQuestion(questionIndex, value as DonutTopping)}>
                 {question.options.map(option => {
                   return (
-                    <div key={option.text} className="flex items-center space-x-2">
-                      <RadioGroupItem value={option.topping} id={option.topping} />
-                      <Label htmlFor={option.topping}>{option.text}</Label>
+                    <div key={option.text + option.topping} className="flex items-center space-x-2">
+                      <RadioGroupItem value={option.topping} id={option.text + option.topping} />
+                      <Label htmlFor={option.text + option.topping}>{option.text}</Label>
                     </div>
                   )
                 })}
