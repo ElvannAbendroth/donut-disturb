@@ -2,9 +2,8 @@
 import { getCollection } from 'astro:content'
 import Layout from '@/layouts/Layout.astro'
 import Prose from '@/components/Prose'
-import Section from '@/components/Section'
 import { getHeadings } from '@/utils/utils'
-import HeroSection from '@/components/sections/HeroSection.astro'
+import { Title, H1 } from '@/components/ui/typography'
 import { Button } from '@/components/ui/button'
 
 // Generate a new path for every collection entry
@@ -30,18 +29,42 @@ export const prerender = true
 ---
 
 <Layout title={entry.data.title} description={entry.data.snippet} openGraphImage={entry.data.image.src.src}>
-  <!-- Hero -->
-  <HeroSection title={entry.data.title} image={entry.data.image.src.src} />
-  <Section.Root className="flex flex-col"
-    ><Section.Content className="flex flex-col gap-6 max-w-layout items-center mx-auto w-full">
-      <Prose><Content /></Prose>
-    </Section.Content></Section.Root
-  >
-  <Section.Root className="flex flex-col"
-    ><Section.Content className="flex flex-col gap-6 max-w-layout items-center mx-auto w-full">
-      <div class="flex flex-col gap-6 flex-grow w-full">
-        <a href="/quiz"><Button>Return</Button></a>
-      </div>
-    </Section.Content></Section.Root
-  >
+  <div class="bg-accent-light pt-48 md:pt-56 px-4 md:py-4 md:px-8 overflow-hidden relative">
+    <div class="max-w-layout mx-auto min-h-96 flex flex-col align-middle gap-4 relative z-0">
+      <img class="absolute -bottom-32 -right-44 -z-10 scale-75" src={entry.data.image.src.src} alt="Donut Splashing" />
+      <Title className="max-w-lg">{entry.data.title}</Title>
+      <p class="max-w-xs">{entry.data.snippet}</p>
+    </div>
+    <svg
+      class="absolute -bottom-2 left-0 w-full fill-background"
+      viewBox="0 0 1440 96"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M0 28.8L60 27.2C120 25.6 240 22.4 360 27.2C480 32 600 44.8 720 54.4C840 64 960 70.4 1080 60.8C1200 51.2 1320 25.6 1380 12.8L1440 0V96H1380C1320 96 1200 96 1080 96C960 96 840 96 720 96C600 96 480 96 360 96C240 96 120 96 60 96H0V28.8Z"
+      >
+      </path>
+    </svg>
+  </div>
+
+  <div class="bg-background px-4 md:py-4 md:px-8 overflow-hidden relative min-h-32 py-16 pb-20 md:pb-20">
+    <div class="max-w-layout mx-auto flex flex-col align-middle gap-4 relative z-0"></div>
+
+    <Prose className="prose-headings:font-header prose-headings:uppercase prose-sm"><Content /></Prose>
+    <a href="/quiz" class={'mt-16'}><Button>Take the Quiz Again</Button></a>
+    <svg
+      class="absolute -bottom-2 left-0 w-full fill-primary-dark"
+      viewBox="0 0 1440 96"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M0 28.8L60 27.2C120 25.6 240 22.4 360 27.2C480 32 600 44.8 720 54.4C840 64 960 70.4 1080 60.8C1200 51.2 1320 25.6 1380 12.8L1440 0V96H1380C1320 96 1200 96 1080 96C960 96 840 96 720 96C600 96 480 96 360 96C240 96 120 96 60 96H0V28.8Z"
+      >
+      </path>
+    </svg>
+  </div>
 </Layout>

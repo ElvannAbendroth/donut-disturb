@@ -46,23 +46,6 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts, questions }) => {
 
   return (
     <>
-      {/* <Section.Root type={'card'}>
-        <Section.Content>
-          <div>
-            <ul className="grid grid-cols-4">
-              {Object.entries(score).map(([name, count]) => {
-                return (
-                  <li key={name} className="flex flex-col gap-2 items-center">
-                    <H1 className="">{count}</H1>
-                    <span>{name}</span>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        </Section.Content>
-      </Section.Root> */}
-
       {questions.map(question => {
         return (
           <Section.Root type={'card'} key={question.data.question} className="max-w-layout mx-auto">
@@ -87,9 +70,9 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts, questions }) => {
         <Section.Root type={'card'}>
           <Section.Content>
             <H2>Your Donut Personality</H2>
-            <p>{topDonut?.data.title}</p>
+
             <a href={`/quiz/${topDonut?.slug}`}>
-              <Button>Check your donut personality</Button>
+              <Button size={'lg'}>Check your Donut personality</Button>
             </a>
           </Section.Content>
         </Section.Root>

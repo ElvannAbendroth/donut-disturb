@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { siteConfig } from '@/utils/config'
-import { Title, H1 } from '@/components/ui/typography'
+import { Title, H1, H2 } from '@/components/ui/typography'
 import { Button } from '@/components/ui/button'
 
 export const prerender = true
@@ -9,7 +9,7 @@ export const prerender = true
 
 <Layout title={siteConfig.name}>
   <!-- Hero Section -->
-  <div class="bg-secondary-light pt-48 md:pt-56 px-4 md:py-4 md:px-8 overflow-hidden relative">
+  <div class="bg-secondary-light pt-48 md:pt-36 px-4 md:py-32 md:px-8 overflow-hidden relative">
     <div class="max-w-layout mx-auto min-h-96 flex flex-col align-middle gap-4 relative z-0">
       <img class="absolute -bottom-16 -right-32 -z-10" src="/src/assets/hero-donut.png" alt="Donut Splashing" />
       <Title className="max-w-lg">Donut Disturb</Title>
@@ -30,9 +30,31 @@ export const prerender = true
     </svg>
   </div>
   <!-- Mini Games Section -->
-  <div class="bg-background px-4 md:py-4 md:px-8 overflow-hidden relative min-h-32 py-16">
-    <div class="max-w-layout mx-auto flex flex-col align-middle gap-4 relative z-0"></div>
-    <H1>Mini Games</H1>
+  <div class="bg-background px-4 md:py-36 md:px-8 overflow-hidden relative min-h-32 py-16">
+    <div class="max-w-layout mx-auto flex flex-col align-middle gap-8 relative z-0">
+      <H1>Mini Games</H1>
+      <a href="/quiz">
+        <div class="flex gap-10 items-center w-full hover:opacity-90 transition-all hover: cursor-pointer">
+          <img class="size-64 rounded-3xl" src="/src/assets/quiz.png" alt="" />
+
+          <div class="flex flex-col gap-4">
+            <H2>QUIZ: What Donut Are you?</H2>
+            <span><a href="/quiz"><Button variant={'secondary'}>Take the Quiz</Button></a></span>
+          </div>
+        </div>
+      </a>
+      <a href="/quiz">
+        <div class="flex gap-10 items-center w-full hover:opacity-90 transition-all hover: cursor-pointer">
+          <img class="size-64 rounded-3xl" src="/src/assets/quiz.png" alt="" />
+
+          <div class="flex flex-col gap-4">
+            <H2>QUIZ: What Donut Are you?</H2>
+            <span><a href="/quiz"><Button variant={'secondary'}>Take the Quiz</Button></a></span>
+          </div>
+        </div>
+      </a>
+    </div>
+
     <svg
       class="absolute -bottom-2 left-0 w-full fill-primary-dark"
       viewBox="0 0 1440 96"

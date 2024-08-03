@@ -23,7 +23,7 @@ interface NavbarProps {
 
 export const Navbar: FC<NavbarProps> = ({ pathname, user }) => {
   return (
-    <nav className="px-4 py-4 md:py-4 md:px-8 m-2 ">
+    <nav className="px-4 py-2 md:px-8 m-2 ">
       <div className="flex justify-between max-w-layout mx-auto">
         <Logo />
         <div className="flex flex-gap-12 items-center gap-4 ">
