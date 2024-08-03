@@ -65,7 +65,7 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts, questions }) => {
 
       {questions.map(question => {
         return (
-          <Section.Root type={'card'} key={question.data.question}>
+          <Section.Root type={'card'} key={question.data.question} className="max-w-layout mx-auto">
             <Section.Content>
               <H2>{question.data.question}</H2>
 

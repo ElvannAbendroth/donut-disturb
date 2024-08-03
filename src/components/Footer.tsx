@@ -7,8 +7,8 @@ interface FooterProps {}
 
 const Footer: FC<FooterProps> = () => {
   return (
-    <footer className="light p-4 max-w-layout mx-auto w-full bg-primary-dark text-primary-foreground">
-      <div className="grid grid-cols-1  gap-12 py-10 px-8 mb-6 ">
+    <footer className="light p-4  mx-auto w-full bg-primary-dark text-primary-foreground">
+      <div className="grid grid-cols-1  gap-12 py-10 px-8 mb-6 max-w-layout mx-auto">
         <div className="flex flex-col gap-4">
           <Logo />
           <p className="text-primary-foreground/60">{siteConfig.description}</p>
