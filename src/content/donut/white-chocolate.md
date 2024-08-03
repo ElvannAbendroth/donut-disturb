@@ -1,10 +1,17 @@
 ---
 title: White Chocolate
-snippet: "White chocolate donuts are sophisticated"
+snippet: "The Elegant Sophisticate"
 image: {
 src: "white-chocolate.png",
 alt: "White Chocolate Donut"
 }
 ---
 
-You're vibrant and full of energy! You bring excitement wherever you go, making you the perfect match for a chocolate sprinkles donut.
+With a refined taste and an eye for elegance, you embody sophistication. Just like the smooth and luxurious taste of white chocolate, you exude a calm and collected demeanor. You have a keen appreciation for the finer things in life and enjoy indulging in experiences that offer a touch of class and luxury. Your sophisticated nature means you are often drawn to art, culture, and intellectual pursuits. You value quality over quantity and take pride in your discerning tastes.
+
+## Key Traits:
+
+- Sophisticated
+- Elegant
+- Intellectual
+- Discerning
