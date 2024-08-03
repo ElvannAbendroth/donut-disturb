@@ -5,6 +5,14 @@ interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
   className?: string
 }
 
+export const Title: React.FC<TypographyProps> = ({ children, className, ...props }) => {
+  return (
+    <h1 className={cn('typo-title', className)} {...props}>
+      {children}
+    </h1>
+  )
+}
+
 export const H1: React.FC<TypographyProps> = ({ children, className, ...props }) => {
   return (
     <h1 className={cn('typo-h1', className)} {...props}>

@@ -2,7 +2,7 @@ import type { Feature, NavItem, SiteConfig, Social, Testimonial, FooterLinksCol 
 
 export const siteConfig: SiteConfig = {
   name: 'Donut Disturb',
-  description: 'Donut Distrub is a series of mini donut-related games for donut lovers.',
+  description: 'Donut Disturb is a series of mini donut-related games for donut lovers.',
   url: 'http://rock-your-astro.vercel.app/',
   ogImage: 'https://tx.shadcn.com/og.jpg',
   links: {
@@ -24,7 +24,7 @@ export const siteConfig: SiteConfig = {
   },
 }
 
-export const navItems: NavItem[] = [{ label: 'Quiz', href: '/quiz', type: 'link' }]
+export const navItems: NavItem[] = [{ label: 'Take the Quiz', href: '/quiz', type: 'button' }]
 
 export const footerLinksCol1 = {
   title: 'Links',
@@ -51,15 +51,3 @@ export const socials: Social[] = [
   { icon: 'Linkedin', href: 'https://www.linkedin.com/in/oodri/', target: '_bank' },
   { icon: 'Globe', href: 'http://www.oodri.dev', target: '_bank' },
 ]
-
-// Your web app's Firebase configuration
-export const firebaseConfig = {
-  apiKey: 'AIzaSyBSd9dKk1o78712xxCCjbw3hgQ-vtDFnEk',
-  authDomain: 'rock-your-astro-ede3c.firebaseapp.com',
-  databaseURL: 'https://rock-your-astro-ede3c-default-rtdb.europe-west1.firebasedatabase.app',
-  projectId: 'rock-your-astro-ede3c',
-  storageBucket: 'rock-your-astro-ede3c.appspot.com',
-  messagingSenderId: '301319897532',
-  appId: '1:301319897532:web:df1b910016201998596bb9',
-  measurementId: 'G-ZMFCTMS971',
-}

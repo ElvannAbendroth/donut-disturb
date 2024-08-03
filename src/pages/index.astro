@@ -1,15 +1,49 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { siteConfig } from '@/utils/config'
-import HeroSection from '@/components/sections/HeroSection.astro'
-
-import { getCollection } from 'astro:content'
-
-const projects = await getCollection('project')
+import { Title, H1 } from '@/components/ui/typography'
+import { Button } from '@/components/ui/button'
 
 export const prerender = true
 ---
 
 <Layout title={siteConfig.name}>
-  <HeroSection title="Donut Disturb" />
+  <!-- Hero Section -->
+  <div class="bg-secondary-light pt-48 md:pt-56 px-4 md:py-4 md:px-8 overflow-hidden relative">
+    <div class="max-w-layout mx-auto min-h-96 flex flex-col align-middle gap-4 relative z-0">
+      <img class="absolute -bottom-16 -right-32 -z-10" src="/src/assets/hero-donut.png" alt="Donut Splashing" />
+      <Title className="max-w-lg">Donut Disturb</Title>
+      <p class="max-w-xs">Games for donut enthusiasts & folks with a sweet tooth.</p>
+      <div><a href="/quiz"><Button variant={'secondary'}>Take the Quiz</Button></a></div>
+    </div>
+    <svg
+      class="absolute -bottom-2 left-0 w-full fill-background"
+      viewBox="0 0 1440 96"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M0 28.8L60 27.2C120 25.6 240 22.4 360 27.2C480 32 600 44.8 720 54.4C840 64 960 70.4 1080 60.8C1200 51.2 1320 25.6 1380 12.8L1440 0V96H1380C1320 96 1200 96 1080 96C960 96 840 96 720 96C600 96 480 96 360 96C240 96 120 96 60 96H0V28.8Z"
+      >
+      </path>
+    </svg>
+  </div>
+  <!-- Mini Games Section -->
+  <div class="bg-background px-4 md:py-4 md:px-8 overflow-hidden relative min-h-32 py-16">
+    <div class="max-w-layout mx-auto flex flex-col align-middle gap-4 relative z-0"></div>
+    <H1>Mini Games</H1>
+    <svg
+      class="absolute -bottom-2 left-0 w-full fill-primary-dark"
+      viewBox="0 0 1440 96"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M0 28.8L60 27.2C120 25.6 240 22.4 360 27.2C480 32 600 44.8 720 54.4C840 64 960 70.4 1080 60.8C1200 51.2 1320 25.6 1380 12.8L1440 0V96H1380C1320 96 1200 96 1080 96C960 96 840 96 720 96C600 96 480 96 360 96C240 96 120 96 60 96H0V28.8Z"
+      >
+      </path>
+    </svg>
+  </div>
 </Layout>

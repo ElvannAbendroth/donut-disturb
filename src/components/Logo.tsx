@@ -7,7 +7,7 @@ interface LogoProps {}
 const Logo: FC<LogoProps> = () => {
   return (
     <a
-      className="text-xl tracking-wider font-display hover:text-foreground-hover flex gap-3 place-items-center"
+      className="text-xl tracking-wider font-display hover:text-foreground-hover flex gap-3 place-items-center uppercase"
       href="/"
     >
       <Icon name="Donut" size={28} strokeWidth={2.5} /> <span>{siteConfig.name}</span>

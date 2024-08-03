@@ -22,9 +22,9 @@ export default {
         current: 'currentColor',
       },
       fontFamily: {
-        display: ['Minecrafter', ...defaultTheme.fontFamily.sans],
-        header: ['Minecrafter', ...defaultTheme.fontFamily.sans],
-        body: ['Lato', ...defaultTheme.fontFamily.sans],
+        display: ['Paschal Regular', ...defaultTheme.fontFamily.sans],
+        header: ['Paschal Regular', ...defaultTheme.fontFamily.sans],
+        body: ['Satoshi-Regular', ...defaultTheme.fontFamily.sans],
       },
       maxWidth: {
         layout: '64rem',
