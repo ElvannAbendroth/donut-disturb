@@ -12,11 +12,17 @@ export const prerender = true
 <Layout title={siteConfig.name}>
   <!-- Hero Section -->
   <div class="bg-secondary-light pt-48 md:pt-36 px-4 md:py-32 md:px-8 overflow-hidden relative">
-    <div class="max-w-layout mx-auto min-h-96 flex flex-col align-middle gap-4 relative z-0">
-      <img class="absolute -bottom-16 -right-32 -z-10" src={heroImage.src} alt="Donut Splashing" />
-      <Title className="max-w-lg">Donut Disturb</Title>
-      <p class="max-w-xs">Games for donut enthusiasts & folks with a sweet tooth.</p>
-      <div><a href="/quiz"><Button variant={'secondary'}>Take the Quiz</Button></a></div>
+    <div class="max-w-layout mx-auto min-h-96 flex flex-col align-middle gap-4">
+      <div class="relative z-0 flex flex-col gap-4">
+        <img
+          class="absolute top-0 left-0 -translate-y-1/3 translate-x-1/3 -z-10 scale-[120%] md:scale-[90%]"
+          src={heroImage.src}
+          alt="Donut Splashing"
+        />
+        <Title className="max-w-lg">Donut Disturb</Title>
+        <p class="max-w-xs">Games for donut enthusiasts & folks with a sweet tooth.</p>
+        <div><a href="/quiz"><Button variant={'secondary'}>Take the Quiz</Button></a></div>
+      </div>
     </div>
     <svg
       class="absolute -bottom-2 left-0 w-full fill-background"
@@ -34,11 +40,15 @@ export const prerender = true
   <!-- Mini Games Section -->
   <div class="bg-background px-4 md:py-36 md:px-8 overflow-hidden relative min-h-32 py-16">
     <div class="max-w-layout mx-auto flex flex-col align-middle gap-8 relative z-0">
-      <H1>Mini Games</H1>
+      <H1 className={'text-center'}>Mini Games</H1>
 
       <a href="/quiz">
         <div class="flex gap-10 items-center w-full hover:opacity-90 transition-all hover: cursor-pointer">
-          <img class="size-64 rounded-3xl" src={quizImage.src} alt="Three creamy and tasty donuts" />
+          <img
+            class="size-64 aspect-square object-cover rounded-3xl"
+            src={quizImage.src}
+            alt="Three creamy and tasty donuts"
+          />
 
           <div class="flex flex-col gap-4">
             <H2>QUIZ: What Donut Are you?</H2>

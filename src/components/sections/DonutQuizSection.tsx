@@ -46,18 +46,23 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts, questions }) => {
 
   return (
     <>
-      {questions.map(question => {
+      {questions.map((question, i) => {
         return (
           <Section.Root type={'card'} key={question.data.question} className="max-w-layout mx-auto">
-            <Section.Content>
-              <H2>{question.data.question}</H2>
+            <Section.Content className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <p className="uppercase text-secondary font-black text-lg">Question #{i + 1}</p>
+                <H2 className="mt-0">{question.data.question}</H2>
+              </div>
 
               <RadioGroup onValueChange={value => answerQuestion(question, value as DonutTopping)}>
                 {Object.entries(question.data.options).map(option => {
                   return (
                     <div key={option[0] + option[1]} className="flex items-center space-x-2">
-                      <RadioGroupItem value={option[0]} id={option[1] + option[0]} />
-                      <Label htmlFor={option[1] + option[0]}>{option[1]}</Label>
+                      <RadioGroupItem className="text-base" value={option[0]} id={option[1] + option[0]} />
+                      <Label className="text-base" htmlFor={option[1] + option[0]}>
+                        {option[1]}
+                      </Label>
                     </div>
                   )
                 })}
