@@ -2,10 +2,8 @@
 import { getCollection } from 'astro:content'
 import Layout from '@/layouts/Layout.astro'
 import { siteConfig } from '@/utils/config'
-import HeroSection from '@/components/sections/HeroSection.astro'
-import { Title, H1 } from '@/components/ui/typography'
-import { Button } from '@/components/ui/button'
 import DonutQuizSection from '@/components/sections/DonutQuizSection'
+import heroImage from '../../assets/hero-donut-2.png'
 
 const donutEntries = await getCollection('donut')
 const questionEntries = await getCollection('question')
@@ -14,7 +12,7 @@ const questionEntries = await getCollection('question')
 <Layout title={siteConfig.name}>
   <div class="bg-accent-light pt-48 md:pt-56 px-4 md:py-4 md:px-8 overflow-hidden relative">
     <div class="max-w-layout mx-auto min-h-96 flex flex-col align-middle gap-4 relative z-0">
-      <img class="absolute -bottom-16 -right-64 -z-10" src="/src/assets/hero-donut-2.png" alt="Donut Splashing" />
+      <img class="absolute -bottom-16 -right-64 -z-10" src={heroImage.src} alt="Donut Splashing" />
       <h1 class="typo-title-2 max-w-lg">What kind of Donut are you?</h1>
       <p class="max-w-md">
         Ever wondered what kind of donut you are? Wait no further! Take the quiz and discover which donut fits your

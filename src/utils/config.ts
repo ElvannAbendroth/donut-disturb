@@ -47,7 +47,7 @@ export const footerLinksCol2: FooterLinksCol = {
 }
 
 export const socials: Social[] = [
-  { icon: 'Github', href: 'https://github.com/ElvannAbendroth', target: '_bank' },
+  { icon: 'Github', href: 'https://github.com/ElvannAbendroth/donut-disturb', target: '_bank' },
   { icon: 'Linkedin', href: 'https://www.linkedin.com/in/oodri/', target: '_bank' },
   { icon: 'Globe', href: 'http://www.oodri.dev', target: '_bank' },
 ]

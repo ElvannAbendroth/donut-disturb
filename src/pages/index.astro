@@ -3,6 +3,8 @@ import Layout from '@/layouts/Layout.astro'
 import { siteConfig } from '@/utils/config'
 import { Title, H1, H2 } from '@/components/ui/typography'
 import { Button } from '@/components/ui/button'
+import heroImage from '../assets/hero-donut.png'
+import quizImage from '../assets/quiz.png'
 
 export const prerender = true
 ---
@@ -11,7 +13,7 @@ export const prerender = true
   <!-- Hero Section -->
   <div class="bg-secondary-light pt-48 md:pt-36 px-4 md:py-32 md:px-8 overflow-hidden relative">
     <div class="max-w-layout mx-auto min-h-96 flex flex-col align-middle gap-4 relative z-0">
-      <img class="absolute -bottom-16 -right-32 -z-10" src="/src/assets/hero-donut.png" alt="Donut Splashing" />
+      <img class="absolute -bottom-16 -right-32 -z-10" src={heroImage.src} alt="Donut Splashing" />
       <Title className="max-w-lg">Donut Disturb</Title>
       <p class="max-w-xs">Games for donut enthusiasts & folks with a sweet tooth.</p>
       <div><a href="/quiz"><Button variant={'secondary'}>Take the Quiz</Button></a></div>
@@ -33,19 +35,10 @@ export const prerender = true
   <div class="bg-background px-4 md:py-36 md:px-8 overflow-hidden relative min-h-32 py-16">
     <div class="max-w-layout mx-auto flex flex-col align-middle gap-8 relative z-0">
       <H1>Mini Games</H1>
-      <a href="/quiz">
-        <div class="flex gap-10 items-center w-full hover:opacity-90 transition-all hover: cursor-pointer">
-          <img class="size-64 rounded-3xl" src="/src/assets/quiz.png" alt="" />
 
-          <div class="flex flex-col gap-4">
-            <H2>QUIZ: What Donut Are you?</H2>
-            <span><a href="/quiz"><Button variant={'secondary'}>Take the Quiz</Button></a></span>
-          </div>
-        </div>
-      </a>
       <a href="/quiz">
         <div class="flex gap-10 items-center w-full hover:opacity-90 transition-all hover: cursor-pointer">
-          <img class="size-64 rounded-3xl" src="/src/assets/quiz.png" alt="" />
+          <img class="size-64 rounded-3xl" src={quizImage.src} alt="Three creamy and tasty donuts" />
 
           <div class="flex flex-col gap-4">
             <H2>QUIZ: What Donut Are you?</H2>
