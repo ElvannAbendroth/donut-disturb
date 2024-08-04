@@ -15,7 +15,7 @@ const Footer: FC<FooterProps> = () => {
           <div className="flex flex-row gap-4">
             {socials.map(social => {
               return (
-                <a href="/" target={social.target}>
+                <a href={social.href} target={social.target}>
                   <Icon name={social.icon} size={21} />
                 </a>
               )
