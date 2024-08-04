@@ -72,12 +72,15 @@ const DonutQuizSection: FC<DonutQuizSectionProps> = ({ donuts, questions }) => {
         )
       })}
 
-      <Section.Root type={'card'}>
+      <Section.Root type={'card'} className="max-w-layout mx-auto">
         <Section.Content className="flex flex-col gap-4">
           <H2>Your Donut Personality</H2>
           <p>Once you are done answering all the questions, you can check your donut personality here!</p>
 
-          <a href={`/quiz/${topDonut?.slug}`}>
+          <a
+            className={hasUnansweredQuestions ? 'cursor-not-allowed' : ''}
+            href={!hasUnansweredQuestions ? `/quiz/${topDonut?.slug}` : undefined}
+          >
             <Button disabled={hasUnansweredQuestions} size={'lg'}>
               Check your Donut personality
             </Button>
